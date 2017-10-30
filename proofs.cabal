@@ -1,21 +1,17 @@
 name:                proofs
 version:             0.1.0.0
--- synopsis:
--- description:
-homepage:            https://github.com/githubuser/proofs#readme
-license:             BSD3
-license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2017 Author name here
-category:            Web
+homepage:            https://github.com/wkunkel/liquidhaskell-proofs#readme
+author:              Will Kunkel and Patrick Owen
+maintainer:          will@wkunkel.com
+category:            Formal Methods
 build-type:          Simple
 cabal-version:       >=1.10
-extra-source-files:  README.md
+extra-source-files:  README.org
 
-executable proofs
+library
   hs-source-dirs:      src
-  main-is:             Main.hs
+  other-modules:       Proofs
+                     , Types
   default-language:    Haskell2010
   build-depends:       base >= 4.7 && < 5
                      , liquidhaskell >= 0.8 && < 0.9

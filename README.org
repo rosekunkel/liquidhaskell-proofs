@@ -12,11 +12,11 @@
 *** TODO ~add x (add y z) = add (add x y) z~
 *** TODO ~length (replicate n x) = n~
 *** TODO ~reverse (reverse xs) = xs~ and corresponding lemmas
-*** TODO ~reverse xs = reverse' [] xs~
+*** TODO ~reverse xs = reverse′ [] xs~
 *** TODO ~reverse = foldl (:) []~
-*** TODO ~flatten t = flatten' t []~
+*** TODO ~flatten t = flatten′ t []~
 *** TODO ~exec (comp e) [] = [eval e]~ and corresponding lemmas
-*** TODO ~exec (comp' e c) s = exec c (eval e : s)~
+*** TODO ~exec (comp′ e c) s = exec c (eval e : s)~
 ** Exercises
 *** TODO ~add n (Succ m) = Succ (add n m)~
 *** TODO ~add n m = add m n~
@@ -27,4 +27,4 @@
 *** TODO ~map f (map g xs) = map (f . g) xs~
 *** TODO ~take n xs ++ drop n xs = xs~
 *** TODO the number of leaves in a binary tree without empty nodes is one more than the number of internal nodes
-*** TODO construct ~comp'~ given ~comp' e c = comp e ++ c~ (this might not be in scope).
+*** TODO construct ~comp′~ given ~comp′ e c = comp e ++ c~ (this might not be in scope).

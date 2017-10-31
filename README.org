@@ -1,4 +1,5 @@
 #+TITLE: Liquid Haskell Proofs
+[[https://travis-ci.org/wkunkel/liquidhaskell-proofs.svg?branch=master]]
 * Goals
 - Formally prove the theorems outlined in the “Reasoning about
   Programs” chapter of the book “Programming in Haskell” using Liquid

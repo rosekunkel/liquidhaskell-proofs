@@ -13,6 +13,7 @@ main =
 orderedFiles :: [FilePath]
 orderedFiles =
   [ "Proofs.hs"
+  , "Replicate.hs"
   , "Types.hs"
   ]
 

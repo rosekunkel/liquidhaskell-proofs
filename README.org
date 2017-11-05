@@ -13,8 +13,8 @@
 *** TODO ~add x (add y z) = add (add x y) z~
 *** TODO ~length (replicate n x) = n~
 *** TODO ~reverse (reverse xs) = xs~ and corresponding lemmas
-*** TODO ~reverse xs = reverse′ [] xs~
-*** TODO ~reverse = foldl (:) []~
+*** TODO ~reverse xs = reverse′ xs []~
+*** TODO ~reverse xs = foldl (flip (:)) [] xs~
 *** TODO ~flatten t = flatten′ t []~
 *** TODO ~exec (comp e) [] = [eval e]~ and corresponding lemmas
 *** TODO ~exec (comp′ e c) s = exec c (eval e : s)~

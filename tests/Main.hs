@@ -14,6 +14,7 @@ orderedFiles :: [FilePath]
 orderedFiles =
   [ "Proofs.hs"
   , "Replicate.hs"
+  , "Flatten.hs"
   , "Types.hs"
   , "Data/List/Verified.hs"
   , "Data/Monoid/Verified.hs"

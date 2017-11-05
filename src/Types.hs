@@ -1,11 +1,11 @@
 {-@ LIQUID "--higherorder"    @-}
 {-@ LIQUID "--exact-data-con" @-}
 {-@ LIQUID "--automatic-instances=liquidinstances" @-}
-module Types ( L(..)
-             , length
-             , N(..)
-             , value
-             ) where
+module Types
+  ( L(..), length
+  , N(..), value
+  , Tree(..), size
+  ) where
 
 import Prelude hiding (length)
 
@@ -28,3 +28,13 @@ data N = Zero | Succ N
 value :: N -> Int
 value Zero = 0
 value (Succ n) = 1 + value n
+
+{-@ data Tree [size] @-}
+data Tree = Leaf Int | Node Tree Tree
+
+{-@ measure size @-}
+{-@ invariant {v:Tree | 0 <= size v} @-}
+{-@ size :: Tree -> Nat @-}
+size :: Tree -> Int
+size (Leaf _) = 1
+size (Node l r) = 1 + (size l) + (size r)

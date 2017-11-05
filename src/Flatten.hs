@@ -3,7 +3,7 @@
 {-@ LIQUID "--automatic-instances=liquidinstances" @-}
 module Flatten where
 
-import Prelude hiding (flatten, length, (++))
+import Prelude hiding (flatten, length, (++), reverse)
 import Language.Haskell.Liquid.ProofCombinators
 import Types hiding (L(..), length)
 import Data.List.Verified

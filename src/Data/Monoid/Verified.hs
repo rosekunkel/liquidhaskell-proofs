@@ -3,7 +3,7 @@
 {-@ LIQUID "--automatic-instances=liquidinstances" @-}
 module Data.Monoid.Verified where
 
-import Prelude hiding (Monoid(..), (++), length)
+import Prelude hiding (Monoid(..), (++), reverse, length)
 import Language.Haskell.Liquid.ProofCombinators
 import Data.List.Verified
 

@@ -11,11 +11,6 @@ import Data.List.Verified
 {-@ infixr 5 ::: @-}
 {-@ infixr 5 ++ @-}
 
-{-@ reflect reverse @-}
-reverse :: List a -> List a
-reverse Nil = Nil
-reverse (x:::xs) = reverse xs ++ (x:::Nil)
-
 {-@ reverseSingletonIdentity :: x:a -> {reverse (x:::Nil) = x:::Nil}  @-}
 reverseSingletonIdentity :: a -> Proof
 reverseSingletonIdentity x = trivial

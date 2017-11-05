@@ -4,12 +4,13 @@
 module Data.List.Verified
   ( List(..)
   , (++)
+  , reverse
   , length
   , appendRightId
   , appendAssoc
   ) where
 
-import Prelude hiding ((++), length)
+import Prelude hiding ((++), length, reverse)
 import Language.Haskell.Liquid.ProofCombinators
 
 {-@ infixr 5 ::: @-}
@@ -24,6 +25,11 @@ data List a = Nil | a:::(List a)
 (++) :: List a -> List a -> List a
 Nil ++ ys = ys
 (x:::xs) ++ ys = x:::xs ++ ys
+
+{-@ reflect reverse @-}
+reverse :: List a -> List a
+reverse Nil = Nil
+reverse (x:::xs) = reverse xs ++ (x:::Nil)
 
 {-@ measure length @-}
 {-@ invariant {v:List a | 0 <= length v} @-}

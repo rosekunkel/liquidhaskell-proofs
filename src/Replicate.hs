@@ -3,7 +3,7 @@
 {-@ LIQUID "--automatic-instances=liquidinstances" @-}
 module Replicate where
 
-import Prelude hiding (replicate, (++), length)
+import Prelude hiding (replicate, (++), reverse, length)
 import Language.Haskell.Liquid.ProofCombinators
 import Data.List.Verified
 

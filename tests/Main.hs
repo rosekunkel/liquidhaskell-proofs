@@ -15,6 +15,7 @@ orderedFiles =
   [ "Proofs.hs"
   , "Replicate.hs"
   , "Flatten.hs"
+  , "ReverseEfficient.hs"
   , "Types.hs"
   , "Data/List/Verified.hs"
   , "Data/Monoid/Verified.hs"

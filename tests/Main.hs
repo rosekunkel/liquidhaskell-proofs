@@ -15,6 +15,8 @@ orderedFiles =
   [ "Proofs.hs"
   , "Replicate.hs"
   , "Types.hs"
+  , "Data/List/Verified.hs"
+  , "Data/Monoid/Verified.hs"
   ]
 
 sourceDir :: FilePath

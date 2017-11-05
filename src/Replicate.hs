@@ -1,4 +1,4 @@
-{-@ LIQUID "--higherorder"    @-}
+{-@ LIQUID "--higherorder" @-}
 {-@ LIQUID "--exact-data-con" @-}
 {-@ LIQUID "--automatic-instances=liquidinstances" @-}
 module Replicate where

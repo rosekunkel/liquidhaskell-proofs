@@ -3,16 +3,16 @@
 {-@ LIQUID "--automatic-instances=liquidinstances" @-}
 module Replicate where
 
-import Prelude hiding (replicate, length)
+import Prelude hiding (replicate, (++), length)
 import Language.Haskell.Liquid.ProofCombinators
-import Types
+import Data.List.Verified
 
 {-@ reflect replicate @-}
-{-@ replicate :: Nat -> a -> L a @-}
-replicate :: Int -> a -> L a
+{-@ replicate :: Nat -> a -> List a @-}
+replicate :: Int -> a -> List a
 replicate n x
   | n == 0 = Nil
-  | otherwise = Cons x (replicate (n - 1) x)
+  | otherwise = x:::(replicate (n - 1) x)
 
 {-@ replicateLengthCorrect :: n:Nat -> x:a -> { length (replicate n x) = n } @-}
 replicateLengthCorrect :: Int -> a -> Proof

@@ -17,6 +17,7 @@ orderedFiles =
   , "Flatten.hs"
   , "ReverseEfficient.hs"
   , "AdditionCompiler.hs"
+  , "Exercises.hs"
   , "Types.hs"
   , "Data/List/Verified.hs"
   , "Data/Monoid/Verified.hs"

@@ -42,6 +42,11 @@ comp :: Expr -> Code
 comp (Val n) = PUSH n:::Nil
 comp (Add x y) = comp x ++ comp y ++ (ADD:::Nil)
 
+{-@ reflect comp' @-}
+comp' :: Expr -> Code -> Code
+comp' (Val n) c = PUSH n ::: c
+comp' (Add x y) c = comp' x (comp' y (ADD ::: c))
+
 {-@ infixr 5 ::: @-}
 {-@ infixr 5 ++ @-}
 
@@ -92,4 +97,17 @@ compCorrectAnyStack e s = case e of
     ==. eval x + eval y:::s
     ==. eval (Add x y):::s
     ==. eval e:::s
+    *** QED
+
+{-@ comp'Correct :: e:Expr -> c:Code -> s:(List Int) -> { exec (comp' e c) s = exec c (eval e:::s) } @-}
+comp'Correct :: Expr -> Code -> List Int -> Proof
+comp'Correct e c s = case e of
+  Val n -> trivial
+  Add x y ->
+    exec (comp' (Add x y) c) s
+    ==. exec (comp' x (comp' y (ADD:::c))) s
+    ==. exec (comp' y (ADD:::c)) (eval x:::s) ? comp'Correct x (comp' y (ADD:::c)) s
+    ==. exec (ADD:::c) (eval y:::eval x:::s) ? comp'Correct y (ADD:::c) (eval x:::s)
+    ==. exec c (eval x+eval y:::s)
+    ==. exec c (eval (Add x y):::s)
     *** QED

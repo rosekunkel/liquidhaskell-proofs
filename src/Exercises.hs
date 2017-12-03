@@ -3,7 +3,7 @@
 {-@ LIQUID "--automatic-instances=liquidinstances" @-}
 module Exercises where
 
-import Prelude hiding ((++), reverse, length, all, replicate)
+import Prelude hiding ((++), reverse, length, all, replicate, map, take, drop)
 import Language.Haskell.Liquid.ProofCombinators
 import Data.List.Verified
 import Types
@@ -15,6 +15,37 @@ import Types
 add :: N -> N -> N
 add Zero m = m
 add (Succ n) m = Succ (add n m)
+
+{-@ reflect compose @-}
+compose :: (b -> c) -> (a -> b) -> (a -> c)
+compose f g x = f (g x)
+
+{-@ reflect map @-}
+map :: (a -> b) -> List a -> List b
+map f Nil = Nil
+map f (x:::xs) = (f x):::(map f xs)
+
+{-@ reflect take @-}
+{-@ take :: {v:Int | v >= 0} -> List a -> List a @-}
+take :: Int -> List a -> List a
+take n Nil = Nil
+take n (x:::xs) = if n == 0 then Nil else x:::take (n-1) xs
+
+{-@ reflect drop @-}
+{-@ drop :: {v:Int | v >= 0} -> List a -> List a @-}
+drop :: Int -> List a -> List a
+drop n Nil = Nil
+drop n (x:::xs) = if n == 0 then (x:::xs) else drop (n-1) xs
+
+{-@ reflect numInodes @-}
+numInodes :: Tree -> Int
+numInodes (Leaf _) = 0
+numInodes (Node l r) = 1 + (numInodes l) + (numInodes r)
+
+{-@ reflect numLeaves @-}
+numLeaves :: Tree -> Int
+numLeaves (Leaf _) = 1
+numLeaves (Node l r) = (numLeaves l) + (numLeaves r)
 
 {-@ addSuccR :: n:_ -> m:_ -> { add n (Succ m) = Succ (add n m) } @-}
 addSuccR :: N -> N -> Proof
@@ -107,3 +138,27 @@ appAssoc xs ys zs = case xs of
     ==. (x:::(xs' ++ ys)) ++ zs
     ==. ((x:::xs') ++ ys) ++ zs
     *** QED
+
+{-@ reverseSingle :: xs:_ -> x:_ -> { reverse (xs ++ (x:::Nil)) = x:::reverse xs } @-}
+reverseSingle :: List a -> a -> Proof
+reverseSingle xs x = case xs of
+  Nil -> trivial
+  x':::xs' -> reverseSingle xs' x
+
+{-@ mapCompose :: f:_ -> g:_ -> xs:_ -> { map f (map g xs) = map (compose f g) xs } @-}
+mapCompose :: (b -> c) -> (a -> b) -> List a -> Proof
+mapCompose f g xs = case xs of
+  Nil -> trivial
+  x:::xs' -> mapCompose f g xs'
+
+{-@ takeDrop :: n:{v:Int | v >= 0} -> xs:_ -> { take n xs ++ drop n xs = xs } @-}
+takeDrop :: Int -> List a -> Proof
+takeDrop n xs = case xs of
+  Nil -> trivial
+  x:::xs' -> if n == 0 then trivial else takeDrop (n-1) xs'
+
+{-@ leavesVsInodes :: t:Tree -> { numLeaves t = numInodes t + 1 } @-}
+leavesVsInodes :: Tree -> Proof
+leavesVsInodes t = case t of
+  Leaf _ -> trivial
+  Node l r -> leavesVsInodes l ==. leavesVsInodes r *** QED

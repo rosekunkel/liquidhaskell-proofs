@@ -161,4 +161,4 @@ takeDrop n xs = case xs of
 leavesVsInodes :: Tree -> Proof
 leavesVsInodes t = case t of
   Leaf _ -> trivial
-  Node l r -> leavesVsInodes l ==. leavesVsInodes r *** QED
+  Node l r -> leavesVsInodes l ==> leavesVsInodes r
